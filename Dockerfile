@@ -30,16 +30,20 @@ RUN apt-get update \
         procps \
         whois \
         wget \
+        dpkg \
+        libcupsimage2 \
+        cups-bsd \
+        libgtk-3-0 \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Add Canon Drivers
-RUN wget -q https://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwOTIzNjIw&cmp=ABR&lang=EN \
-&& tar -xvzf linux-UFRII-drv-v600-us-02.tar.gz \ 
-&& linux-UFRII-drv-v600-us-02 \
-&& linux-UFRII-drv-v600-us/install.sh \
+RUN wget -q https://gdlp01.c-wss.com/gds/6/0100009236/20/linux-UFRII-drv-v600-us-02.tar.gz \
+&& tar -xvzf linux-UFRII-drv-v600-us-02.tar.gz \
+&& dpkg -i linux-UFRII-drv-v600-us/ARM64/Debian/cnrdrvcups-ufr2-us_6.00-1.02_arm64.deb \
+&& service cups restart \
 && rm -f linux-UFRII-drv-v600-us-02.tar.gz \
-&& rm -rf linux-UFRII-drv-v600-us-02
+&& rm -rf linux-UFRII-drv-v600-us
 
 
 

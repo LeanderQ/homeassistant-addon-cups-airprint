@@ -32,6 +32,16 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
+# Add Canon Drivers
+RUN wget -q https://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwOTIzNjIw&cmp=ABR&lang=EN \
+&& tar -xvzf linux-UFRII-drv-v600-us-02.tar.gz \ 
+&& linux-UFRII-drv-v600-us-02 \
+&& linux-UFRII-drv-v600-us/install.sh \
+&& rm -f linux-UFRII-drv-v600-us-02.tar.gz \
+&& rm -rf linux-UFRII-drv-v600-us-02
+
+
+
 COPY rootfs /
 
 # Add user and disable sudo password checking
